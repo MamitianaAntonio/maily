@@ -1,9 +1,11 @@
 package com.antonio.demo.endpoint.event.model;
 
+import static com.antonio.demo.endpoint.event.EventStack.EVENT_STACK_1;
+
 import com.antonio.demo.PojaGenerated;
+import com.antonio.demo.endpoint.event.EventStack;
 import java.io.Serializable;
 import java.time.Duration;
-import com.antonio.demo.endpoint.event.EventStack;
 
 @PojaGenerated
 public abstract class PojaEvent implements Serializable {
@@ -32,7 +34,7 @@ public abstract class PojaEvent implements Serializable {
   }
 
   public String getEventSource() {
-    if (getEventStack().equals(EVENT_STACK_1)) return "com.antonio.demo.event1";
+    if (getEventStack().equals(EventStack.EVENT_STACK_1)) return "com.antonio.demo.event1";
     return "com.antonio.demo.event2";
   }
 }
