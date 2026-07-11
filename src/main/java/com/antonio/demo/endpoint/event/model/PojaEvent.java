@@ -6,9 +6,13 @@ import com.antonio.demo.PojaGenerated;
 import com.antonio.demo.endpoint.event.EventStack;
 import java.io.Serializable;
 import java.time.Duration;
+import lombok.Getter;
+import lombok.Setter;
 
 @PojaGenerated
 public abstract class PojaEvent implements Serializable {
+  @Getter @Setter protected int attemptNb;
+
   public abstract Duration maxConsumerDuration();
 
   public Duration eventHandlerInitMaxDuration() {
