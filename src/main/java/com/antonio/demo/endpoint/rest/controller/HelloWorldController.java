@@ -1,8 +1,7 @@
-package com.antonio.demo.endpoint.rest;
+package com.antonio.demo.endpoint.rest.controller;
 
-import com.antonio.demo.mail.Email;
-import com.antonio.demo.mail.Mailer;
-import jakarta.mail.internet.InternetAddress;
+import com.antonio.demo.endpoint.event.EventProducer;
+import com.antonio.demo.endpoint.event.model.SendEmailRequested;
 import java.util.List;
 import lombok.AllArgsConstructor;
 import lombok.SneakyThrows;
@@ -13,16 +12,13 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 @AllArgsConstructor
 public class HelloWorldController {
-  private final Mailer mailer;
+  private final EventProducer<SendEmailRequested> eventProducer;
 
   @GetMapping("/hello")
   @SneakyThrows
   public String helloWorld(@RequestParam String to) {
-    var email =
-        new Email(
-            new InternetAddress(to), List.of(), List.of(), "Hello world", "... world", List.of());
-
-    mailer.accept(email);
+    var event = SendEmailRequested.builder().to(to).build();
+    eventProducer.accept(List.of(event));
     return "... world!";
   }
 }
