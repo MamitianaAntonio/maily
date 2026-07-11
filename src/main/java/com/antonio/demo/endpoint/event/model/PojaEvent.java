@@ -4,11 +4,19 @@ import static com.antonio.demo.endpoint.event.EventStack.EVENT_STACK_1;
 
 import com.antonio.demo.PojaGenerated;
 import com.antonio.demo.endpoint.event.EventStack;
+
+import lombok.Getter;
+import lombok.Setter;
+
 import java.io.Serializable;
 import java.time.Duration;
 
 @PojaGenerated
 public abstract class PojaEvent implements Serializable {
+  @Getter
+  @Setter
+  protected int attemptNb;
+
   public abstract Duration maxConsumerDuration();
 
   public Duration eventHandlerInitMaxDuration() {
@@ -34,7 +42,8 @@ public abstract class PojaEvent implements Serializable {
   }
 
   public String getEventSource() {
-    if (getEventStack().equals(EventStack.EVENT_STACK_1)) return "com.antonio.demo.event1";
+    if (getEventStack().equals(EventStack.EVENT_STACK_1))
+      return "com.antonio.demo.event1";
     return "com.antonio.demo.event2";
   }
 }
