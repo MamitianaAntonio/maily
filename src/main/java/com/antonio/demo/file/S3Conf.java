@@ -13,8 +13,6 @@ public class S3Conf {
 
   @Bean
   public S3Client getS3Client(@Value("eu-west-3") String region) {
-    return S3Client.builder()
-        .region(Region.of(region))
-        .build();
+    return S3Client.builder().region(Region.of(region)).build();
   }
 }

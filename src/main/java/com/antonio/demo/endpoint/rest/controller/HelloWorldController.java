@@ -22,12 +22,7 @@ public class HelloWorldController {
       @RequestParam String body,
       @RequestParam(required = false) String pdfKey) {
     var event =
-        SendEmailRequested.builder()
-            .to(to)
-            .subject(subject)
-            .htmlBody(body)
-            .pdfKey(pdfKey)
-            .build();
+        SendEmailRequested.builder().to(to).subject(subject).htmlBody(body).pdfKey(pdfKey).build();
     eventProducer.accept(List.of(event));
     return "Email sent to " + to;
   }
