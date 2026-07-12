@@ -18,6 +18,7 @@ public class SendEmailRequested extends PojaEvent {
   private String to;
   private String subject;
   private String htmlBody;
+  private String pdfKey;
 
   @Override
   public Duration maxConsumerDuration() {
