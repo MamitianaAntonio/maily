@@ -16,9 +16,10 @@ public class HelloWorldController {
 
   @GetMapping("/hello")
   @SneakyThrows
-  public String helloWorld(@RequestParam String to) {
-    var event = SendEmailRequested.builder().to(to).build();
+  public String helloWorld(
+      @RequestParam String to, @RequestParam String subject, @RequestParam String body) {
+    var event = SendEmailRequested.builder().to(to).subject(subject).htmlBody(body).build();
     eventProducer.accept(List.of(event));
-    return "... world!";
+    return "Email sent to " + to;
   }
 }
